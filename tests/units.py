@@ -76,6 +76,53 @@ class TestEverything(unittest.TestCase):
 
     self._test_should_fail(fail_validators, foo)
 
+
+  def test_confirm(self):
+
+    foo = 3.14
+    
+    pass_validators = [
+      V.Validator(
+        lambda x: isinstance(x, Number), 
+        'must be a number'
+      ),
+
+      V.Validator(
+        lambda x: isinstance(x, float), 
+        'must be a float'
+      ),
+
+      V.Validator(
+        lambda x: x > 0 and x < 100, 
+        'must be greater than 0 and less than 100'
+      ),
+
+      V.Validator(
+        lambda x: x == 3.14, 
+        'must equal 3.14'
+      ),
+    ]
+
+    for v in pass_validators : self.assertTrue(v.confirm(foo))
+
+    fail_validators = [
+
+      V.Validator(
+        R.isinstance(str),
+        'must be a string'
+      ),
+
+      V.Validator(R.equals(42), 'must equal 42'),
+
+      V.Validator(
+        lambda x: x < 0, 
+        'must be less than 0',
+      )
+    ]
+
+    for v in fail_validators : self.assertFalse(v.confirm(foo))
+
+
   def test_list(self):
 
     class Mystery:
