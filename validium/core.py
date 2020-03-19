@@ -12,3 +12,6 @@ class Validator:
 
   def validate(self, target):
     assert self.predicate(target), self.msg
+
+  def confirm(self, target):
+    return self.predicate(target)
