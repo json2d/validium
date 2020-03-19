@@ -10,7 +10,6 @@ from numbers import Number
 
 import unittest
 import ramda as R
-import pandas as pd
 
 import validium as V
 
