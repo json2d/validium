@@ -1,3 +1,8 @@
+import logging
+
+logger = logging.getLogger('validium')
+LOGGER_TAG = '💎'
+
 class Validator:
 
   def __init__(self, predicate, msg=None):
@@ -10,8 +15,11 @@ class Validator:
       msg=msg,
     )
 
-  def validate(self, target):
-    assert self.predicate(target), self.msg
+  def validate(self, target, tag=None):
+    assert self.confirm(target, tag), self.msg
 
-  def confirm(self, target):
-    return self.predicate(target)
+  def confirm(self, target, tag=None):
+    result = self.predicate(target)
+    logger.info(f"[{ LOGGER_TAG + ':' + repr(tag) if tag is not None else LOGGER_TAG}] - {'✅ pass' if result else '❌ fail'}: {self.msg}")
+    
+    return result
