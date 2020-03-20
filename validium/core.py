@@ -1,3 +1,7 @@
+import logging
+log = logging.getLogger("[validium]")
+log.addHandler(logging.NullHandler()) # ignore log messages by defualt
+
 class Validator:
 
   def __init__(self, predicate, msg=None):
@@ -10,8 +14,12 @@ class Validator:
       msg=msg,
     )
 
-  def validate(self, target):
-    assert self.predicate(target), self.msg
+  def validate(self, target, tag=None):
+    assert self.confirm(target, tag), self.msg
 
-  def confirm(self, target):
-    return self.predicate(target)
+  def confirm(self, target, tag=None):
+    result = self.predicate(target)
+    t = tag if tag is not None else target
+    log.info(f"💎({repr(t)}) - {'✅ pass' if result else '❌ fail'}: {self.msg}")
+    
+    return result
