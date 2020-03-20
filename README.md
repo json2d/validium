@@ -97,5 +97,5 @@ You'll get these log messages with some useful info:
 
 ```
 INFO:[validium]:💎(0) - ❌ fail: must be greater than 1
-INFO:[validium]:💎('two') - ✅ pass: must be greater than 1
+INFO:[validium]:💎(two) - ✅ pass: must be greater than 1
 ```

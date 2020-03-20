@@ -19,7 +19,7 @@ class Validator:
 
   def confirm(self, target, tag=None):
     result = self.predicate(target)
-    t = tag if tag is not None else target
-    log.info(f"💎({repr(t)}) - {'✅ pass' if result else '❌ fail'}: {self.msg}")
+    t = tag if tag is not None else repr(target)
+    log.info(f"💎({t}) - {'✅ pass' if result else '❌ fail'}: {self.msg}")
     
     return result
