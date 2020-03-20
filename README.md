@@ -1,4 +1,7 @@
 # validium
+[![PyPI version](https://badge.fury.io/py/validium.svg)](https://badge.fury.io/py/validium)
+[![Build Status](https://travis-ci.com/json2d/validium.svg?branch=master)](https://travis-ci.com/json2d/validium) [![Coverage Status](https://coveralls.io/repos/github/json2d/validium/badge.svg?branch=master)](https://coveralls.io/github/json2d/validium?branch=master)
+
 a Python utility library for performing validations flexibly
 
 ## Installation
@@ -68,4 +71,31 @@ if eq_42.confirm(42):
   print('i think i found the answer')
 else:
   print('need more time to find the answer')
+```
+
+### Looking for results
+
+To see the results from the validators you need to set logging the logging to `logging.INFO` in your code
+
+```py
+import logging
+logging.basicConfig(level=logging.INFO)
+```
+
+Now when you call `validate` or `confirm`:
+
+```py
+import validium as v
+
+gt1 = v.Validator(lambda x : x > 1, 'must be greater than 1')
+
+gt1.confirm(0)
+gt1.validate(2, tag='two')
+```
+
+You'll get these log messages with some useful info:
+
+```
+INFO:[validium]:💎(0) - ❌ fail: must be greater than 1
+INFO:[validium]:💎('two') - ✅ pass: must be greater than 1
 ```
