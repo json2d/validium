@@ -1,7 +1,6 @@
 import logging
-
-logger = logging.getLogger('validium')
-LOGGER_TAG = '💎'
+log = logging.getLogger("[validium]")
+log.addHandler(logging.NullHandler()) # ignore log messages by defualt
 
 class Validator:
 
@@ -20,6 +19,7 @@ class Validator:
 
   def confirm(self, target, tag=None):
     result = self.predicate(target)
-    logger.info(f"[{ LOGGER_TAG + ':' + repr(tag) if tag is not None else LOGGER_TAG}] - {'✅ pass' if result else '❌ fail'}: {self.msg}")
+    t = tag if tag is not None else target
+    log.info(f"💎({repr(t)}) - {'✅ pass' if result else '❌ fail'}: {self.msg}")
     
     return result
